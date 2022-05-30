@@ -1,64 +1,34 @@
 'use strict'
 
-function bindRef(ctx,func){
+void function (){
 
-    return function (){
-        func.call(ctx)
+    function bindRef(ctx,func){
+
+        return function (){
+
+            func.call(ctx,'Tesla','Model X', 2019,'95000$')
+
+        }
+
     }
 
-}
+    const myCar = {
 
-const myCar = {
+        name: 'Toyota',
+        model : 'Corolla',
+        year : 2008,
+        price : '9500$',
 
-    name: 'Toyota',
-    model : 'Corolla',
-    year : 2008,
-    price : '9500$',
+    }
 
-}
+    function src (name,model,year,price){
+        console.log(`name: ${name} \nmodel: ${model} \nyear: ${year} \nprice: ${price} `);
+        console.log(this);
+    }
 
-function src (){
+    let pack = bindRef(myCar,src)
+    pack();
 
-    console.log(this);
-}
-
-let pack = bindRef(myCar,src)
-pack();
-
-
+}();
 
 
-
-
-// const newCar = {
-
-//     name: 'Tesla',
-//     model : 'X',
-//     year : 2019,
-//     price : '95000$',
-
-//     infoCar : function (){
-
-//         console.group(`${this.name} info`)
-//         console.log(`Name is ${this.name}`);
-//         console.log(`Model is ${this.model}`);
-//         console.log(`Year is ${this.year}`);
-//         console.log(`price is ${this.price}`);
-//         console.groupEnd();
-
-//     }   
-// }
-
-
-// const myCar = {
-
-//     name: 'Toyota',
-//     model : 'Corolla',
-//     year : 2008,
-//     price : '9500$',
-
-// }
-
-
-// newCar.infoCar();
-// newCar.infoCar.bind(myCar)();
